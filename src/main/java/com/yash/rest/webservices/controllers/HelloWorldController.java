@@ -7,6 +7,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HelloWorldController {
 
+	//Display Hello World Message
 	@RequestMapping(method=RequestMethod.GET, path = "/hello-world")
 	public String helloWorld(){
 		return "Hello World";
