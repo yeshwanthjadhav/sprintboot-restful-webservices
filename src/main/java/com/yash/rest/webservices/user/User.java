@@ -10,6 +10,7 @@ public class User {
 	
 	private Date birthDate;
 
+	protected User(){};
 	
 	public User(Integer id, String name, Date birthDate) {
 		super();
