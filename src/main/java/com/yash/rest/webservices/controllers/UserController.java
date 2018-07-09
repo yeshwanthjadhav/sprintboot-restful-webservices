@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.yash.rest.webservices.exceptions.UserNotFoundException;
 import com.yash.rest.webservices.user.User;
 import com.yash.rest.webservices.user.UserDaoService;
 
@@ -29,6 +30,10 @@ public class UserController {
 	
 	@GetMapping("/user/{id}")
 	public User retrieveUser(@PathVariable int id){
+		User user = userDao.findOne(id);
+		if(user==null){
+			throw new UserNotFoundException("id-"+id);
+		}
 		return userDao.findOne(id);	
 	}
 	
