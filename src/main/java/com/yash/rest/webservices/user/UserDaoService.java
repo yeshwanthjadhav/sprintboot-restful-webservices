@@ -5,7 +5,9 @@ import java.util.Date;
 import java.util.Iterator;
 import java.util.List;
 
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Repository;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 @Repository  //you can also use @Component
 public class UserDaoService {
@@ -34,7 +36,7 @@ public class UserDaoService {
 		users.add(user);
 		return user;		
 	}
-	
+		
 	public User findOne(int id){
 		for(User user:users){
 			if(user.getId() == id){
