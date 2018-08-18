@@ -1,9 +1,16 @@
 package com.yash.rest.webservices.filters;
 
+import com.fasterxml.jackson.annotation.JsonFilter;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
-@JsonIgnoreProperties(value={"field1"})
+/*
+ We can @JsonIgnoreProperties or @JsonIgnore to ignore properties
+ Best one would be @JsonIgnore as it will not impact if the filed name changes.
+ */
+
+//@JsonIgnoreProperties(value={"field1", "field2"})
+@JsonFilter("SomeBeanFilter")
 public class SomeBean {
 
 	private String field1;
