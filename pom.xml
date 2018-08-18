@@ -32,7 +32,7 @@
 			<artifactId>spring-boot-starter-web</artifactId>
 		</dependency>
 
-<!-- Actuator provide lots of monitors facilities -->
+<!-- Actuator provide lots of monitoring facilities -->
 		<dependency>
 			<groupId>org.springframework.boot</groupId>
 			<artifactId>spring-boot-starter-actuator</artifactId>
