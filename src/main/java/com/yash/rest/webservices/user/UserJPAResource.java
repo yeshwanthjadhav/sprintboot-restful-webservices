@@ -25,8 +25,8 @@ import com.yash.rest.webservices.exceptions.UserNotFoundException;
 @RestController
 public class UserJPAResource {
 
-	@Autowired
-	UserDaoService userDao;
+	//@Autowired
+	//UserDaoService userDao;
 	
 	@Autowired
 	UserRepository userRepository;
@@ -60,13 +60,13 @@ public class UserJPAResource {
 	
 	@PostMapping("/jpa/user")
 	public User addUser(@RequestBody User user){
-		userDao.save(user);
+		userRepository.save(user);
 		return user;
 	}
 
 	@PostMapping("/jpa/users")
 	public ResponseEntity<Object> createUser(@Valid @RequestBody User user){
-		User savedUser = userDao.save(user);
+		User savedUser = userRepository.save(user);
 		URI location = ServletUriComponentsBuilder
 				.fromCurrentRequest()
 				.path("/{id}")
@@ -75,12 +75,9 @@ public class UserJPAResource {
 		return ResponseEntity.created(location).build();
 	}
 
-	@DeleteMapping("/jpa/user/{id}")
+	@DeleteMapping("/jpa/users/{id}")
 	public void deleteUser(@PathVariable int id){
-		User user = userDao.deleteById(id);
-		if(user == null){
-			throw new UserNotFoundException("id - " + id);
-		}
+		userRepository.deleteById(id);
 	}
 	
 }
