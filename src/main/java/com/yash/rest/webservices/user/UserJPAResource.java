@@ -31,6 +31,9 @@ public class UserJPAResource {
 	@Autowired
 	UserRepository userRepository;
 	
+	@Autowired
+	PostRepository postRepository;
+	
 	public UserJPAResource() {
 		// TODO Auto-generated constructor stub
 	}
@@ -90,4 +93,21 @@ public class UserJPAResource {
 		return userOptional.get().getPosts();
 	}
 	
+	@PostMapping("/jpa/users/{id}/posts")
+	public ResponseEntity<Object> createPost(@PathVariable int id, @RequestBody Post post){
+		Optional<User> userOptional = userRepository.findById(id);
+		if(!userOptional.isPresent()){
+			throw new UserNotFoundException("id-" + id);
+		}
+		User user = userOptional.get();
+		post.setUser(user);
+		postRepository.save(post);
+		
+		URI location = ServletUriComponentsBuilder
+				.fromCurrentRequest()
+				.path("/{id}")
+				.buildAndExpand(post.getId()).toUri();
+		
+		return ResponseEntity.created(location).build();
+	}
 }
